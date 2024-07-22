@@ -2,7 +2,7 @@
 
 ### ERD:
 
-![ERD](./StockAPIERD.png)
+![ERD](./erdStockAPI.png)
 
 ### Folder/File Structure:
 
