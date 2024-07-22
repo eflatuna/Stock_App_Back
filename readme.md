@@ -1,8 +1,8 @@
-# FLIGHT API
+# Stock API
 
 ### ERD:
 
-![ERD](./flightApiERD.png)
+![ERD](./StockAPIERD.png)
 
 ### Folder/File Structure:
 
@@ -12,9 +12,13 @@
  ┃ ┗ 📜dbConnection.js
  ┣ 📂controllers
  ┃ ┣ 📜auth.js
- ┃ ┣ 📜flight.js
- ┃ ┣ 📜passenger.js
- ┃ ┣ 📜reservation.js
+ ┃ ┣ 📜firm.js
+ ┃ ┣ 📜sale.js
+ ┃ ┣ 📜purchase.js
+ ┃ ┗ 📜category.js
+ ┃ ┗ 📜brand.js
+ ┃ ┗ 📜product.js
+ ┃ ┗ 📜token.js
  ┃ ┗ 📜user.js
  ┣ 📂errors
  ┃ ┗ 📜customError.js
@@ -30,23 +34,31 @@
  ┃ ┣ 📜queryHandler.js
  ┃ ┗ 📜upload.js
  ┣ 📂models
- ┃ ┣ 📜flight.js
- ┃ ┣ 📜passenger.js
- ┃ ┣ 📜reservation.js
+ ┃ ┣ 📜firm.js
+ ┃ ┣ 📜sale.js
+ ┃ ┣ 📜purchase.js
+ ┃ ┗ 📜brand.js
+ ┃ ┗ 📜category.js
+ ┃ ┗ 📜sale.js
+ ┃ ┗ 📜token.js
  ┃ ┗ 📜user.js
  ┗ 📂routes
  ┃ ┣ 📜auth.js
  ┃ ┣ 📜documents.js
- ┃ ┣ 📜flight.js
+ ┃ ┣ 📜firm.js
  ┃ ┣ 📜index.js
- ┃ ┣ 📜passenger.js
- ┃ ┣ 📜reservation.js
+ ┃ ┣ 📜sale.js
+ ┃ ┣ 📜purchase.js
+ ┃ ┗ 📜product.js
+ ┃ ┗ 📜token.js
  ┃ ┗ 📜user.js
+ ┃ ┗ 📜brand.js
+ ┃ ┗ 📜category.js
  ┃ 📂logs
  ┣ 📜.env
  ┣ 📜.env-sample
  ┣ 📜.gitignore
- ┣ 📜flightApiERD.png
+ ┣ 📜erdStockAPI.png
  ┣ 📜index.js
  ┣ 📜package-lock.json
  ┣ 📜package.json
