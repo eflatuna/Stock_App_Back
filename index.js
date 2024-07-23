@@ -1,25 +1,7 @@
-"use strict"
+"use strict";
 /* -------------------------------------------------------
     NODEJS EXPRESS | CLARUSWAY FullStack Team
 ------------------------------------------------------- */
-//* Project Starter Command
-/*
-    $ cp .env-sample .env
-    $ npm init -y
-    $ npm i express dotenv mongoose express-async-errors => express && read .env & mongodb connect & error
-    $ npm i morgan swagger-autogen swagger-ui-express redoc-express => logging & documentation
-    $ npm i nodemailer multer => email & upload
-    $ mkdir logs => loggin folder
-    $ nodemon
-*/
-//* Use _projectStarter folder
-/*
-    $ cp .env-sample .env
-    $ mkdir logs
-    $ npm install
-    $ nodemon
-*/
-
 const express = require("express");
 const app = express();
 
@@ -27,69 +9,66 @@ const app = express();
 // Required Modules:
 
 // envVariables to process.env:
-require('dotenv').config()
-const PORT = process.env?.PORT || 8000
+require("dotenv").config();
+const HOST = process.env?.HOST || "127.0.0.1";
+const PORT = process.env?.PORT || 8000;
 
 // asyncErrors to errorHandler:
-require('express-async-errors')
+require("express-async-errors");
 
 /* ------------------------------------------------------- */
 // Configrations:
 
 // Connect to DB:
-const { dbConnection } = require('./src/configs/dbConnection')
-dbConnection()
+const { dbConnection } = require("./src/configs/dbConnection");
+dbConnection();
 
 /* ------------------------------------------------------- */
 // Middlewares:
 
 // Accept JSON:
-app.use(express.json())
+app.use(express.json());
 
-// Logger:
-app.use(require('./src/middlewares/logging'))
+// Call static uploadFile:
+app.use("/upload", express.static("./upload"));
 
-// Auhentication:
-app.use(require('./src/middlewares/authentication'))
+// Check Authentication:
+app.use(require("./src/middlewares/authentication"));
 
-// findSearchSortPage / res.getModelList:
-app.use(require('./src/middlewares/queryHandler'))
+// Run Logger:
+app.use(require("./src/middlewares/logger"));
+
+// res.getModelList():
+app.use(require("./src/middlewares/findSearchSortPage"));
 
 /* ------------------------------------------------------- */
 // Routes:
 
 // HomePath:
-app.all('/', (req, res) => {
-    res.send({
-        error: false,
-        message: 'Welcome to PIZZA API',
-        docs: {
-            swagger: "/documents/swagger",
-            redoc: "/documents/redoc",
-            json: "/documents/json",
-        },
-        user: req.user,
-    })
-})
-
-// routes/index.js:
-app.use(require('./src/routes/'))
-
-
-//* eşleşmeyen routeları yakalar
-app.use((req, res, next) => {
-  res.status(404).send({
-    error: true,
-    message: "Route not found!",
-  });
+app.all("/", (req, res) => {
+	res.send({
+		error: false,
+		message: "Welcome to Stock Management API",
+		documents: {
+			swagger: "/documents/swagger",
+			redoc: "/documents/redoc",
+			json: "/documents/json",
+		},
+		user: req.user,
+	});
 });
+
+// Routes:
+app.use(require("./src/routes"));
 
 /* ------------------------------------------------------- */
 
 // errorHandler:
-app.use(require('./src/middlewares/errorHandler'))
+app.use(require("./src/middlewares/errorHandler"));
 
 // RUN SERVER:
-app.listen(PORT, () => console.log('http://127.0.0.1:' + PORT))
+app.listen(PORT, HOST, () => console.log(`http://${HOST}:${PORT}`));
 
 /* ------------------------------------------------------- */
+// Syncronization (must be in commentLine):
+// require('./src/helpers/sync')() // !!! It clear database.
